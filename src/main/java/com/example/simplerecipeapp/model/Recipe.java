@@ -17,15 +17,22 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
-
     @Lob
     private Byte[] image;
-
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public Long getId() {
         return id;
