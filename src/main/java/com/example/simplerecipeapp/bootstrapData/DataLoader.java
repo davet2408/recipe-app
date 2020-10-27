@@ -1,4 +1,4 @@
-package com.example.simplerecipeapp.bootstrap;
+package com.example.simplerecipeapp.bootstrapData;
 
 import com.example.simplerecipeapp.model.*;
 import com.example.simplerecipeapp.repositories.CategoryRepository;
