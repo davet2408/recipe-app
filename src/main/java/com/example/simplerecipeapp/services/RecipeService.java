@@ -1,12 +1,15 @@
 package com.example.simplerecipeapp.services;
 
+import com.example.simplerecipeapp.commands.RecipeCommand;
 import com.example.simplerecipeapp.model.Recipe;
 
 import java.util.Set;
 
 public interface RecipeService {
 
-    public Set<Recipe> getRecipes();
+    Set<Recipe> getRecipes();
 
-    public Recipe findById(Long id);
+    Recipe findById(Long id);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 }
