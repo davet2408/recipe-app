@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
     private final CategoryCommandToCategory categoryConverter;
-    private final IngredientCommandToIngreIngredient ingredientConverter;
+    private final IngredientCommandToIngredient ingredientConverter;
     private final NotesCommandToNotes notesConverter;
 
     public RecipeCommandToRecipe(CategoryCommandToCategory categoryConverter,
-                                 IngredientCommandToIngreIngredient ingredientConverter,
+                                 IngredientCommandToIngredient ingredientConverter,
                                  NotesCommandToNotes notesConverter) {
         this.categoryConverter = categoryConverter;
         this.ingredientConverter = ingredientConverter;

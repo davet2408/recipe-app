@@ -1,11 +1,14 @@
 package com.example.simplerecipeapp.services;
 
 import com.example.simplerecipeapp.commands.IngredientCommand;
+import com.example.simplerecipeapp.converters.IngredientCommandToIngredient;
 import com.example.simplerecipeapp.converters.IngredientToIngredientCommand;
+import com.example.simplerecipeapp.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.example.simplerecipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.example.simplerecipeapp.model.Ingredient;
 import com.example.simplerecipeapp.model.Recipe;
 import com.example.simplerecipeapp.repositories.RecipeRepository;
+import com.example.simplerecipeapp.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -20,15 +23,20 @@ import static org.mockito.Mockito.*;
 class IngredientServiceImplTest {
 
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
+    private final IngredientCommandToIngredient ingredientCommandToIngredient;
 
 
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
+
     IngredientService ingredientService;
 
 
-    public IngredientServiceImplTest() {
+    public IngredientServiceImplTest(IngredientCommandToIngredient ingredientCommandToIngredient) {
+        this.ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
         this.ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
     }
 
@@ -37,7 +45,7 @@ class IngredientServiceImplTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, recipeRepository, unitOfMeasureRepository);
     }
 
     @Test
