@@ -1,6 +1,8 @@
 package com.example.simplerecipeapp.controllers;
 
 import com.example.simplerecipeapp.commands.IngredientCommand;
+import com.example.simplerecipeapp.commands.RecipeCommand;
+import com.example.simplerecipeapp.commands.UnitOfMeasureCommand;
 import com.example.simplerecipeapp.services.IngredientService;
 import com.example.simplerecipeapp.services.RecipeService;
 import com.example.simplerecipeapp.services.UnitOfMeasureService;
@@ -50,6 +52,22 @@ public class IngredientController {
 
         model.addAttribute("ingredient",
                 ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
+
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model) {
+
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
