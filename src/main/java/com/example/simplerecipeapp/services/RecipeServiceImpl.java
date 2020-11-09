@@ -1,5 +1,6 @@
 package com.example.simplerecipeapp.services;
 
+import com.example.simplerecipeapp.Exceptions.NotFoundException;
 import com.example.simplerecipeapp.commands.RecipeCommand;
 import com.example.simplerecipeapp.converters.RecipeCommandToRecipe;
 import com.example.simplerecipeapp.converters.RecipeToRecipeCommand;
@@ -41,7 +42,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipe = recipeRepository.findById(id);
 
         if (recipe.isEmpty()) {
-            throw new RuntimeException("Recipe not found");
+            throw new NotFoundException("Recipe not found. For Id value: " + id.toString());
         }
 
         return recipe.get();
